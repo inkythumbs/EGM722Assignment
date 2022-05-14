@@ -52,7 +52,8 @@ def monument_finder_map(pcode):
         centroid = gpd.GeoSeries(r['geometry']).set_crs(epsg=4326).to_crs(epsg=27700).centroid
         centroid = gpd.GeoSeries(centroid).set_crs(epsg=27700).to_crs(epsg=4326)
         # adding the centroid to the map,and ensuring it displays at the right scale
-        folium.Marker(location=[centroid.y, centroid.x], popup=r['Name']).add_to(my_map)
+        folium.Marker(location=[centroid.y, centroid.x], popup=r['Name'],
+                      icon=folium.Icon(color="red", icon="info-sign")).add_to(my_map)
         # Project to [insert right crs)] projected crs
         nearest_monument = nearest_monument.to_crs(epsg=2263)
         # Access the centroid attribute of each polygon
